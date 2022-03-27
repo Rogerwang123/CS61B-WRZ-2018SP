@@ -127,7 +127,10 @@ public class IntList {
          */
     }
 
-
+    public static IntList addfirst(IntList A, int x) {
+        A = new IntList(x, A);
+        return A;
+    }
 
 
 
