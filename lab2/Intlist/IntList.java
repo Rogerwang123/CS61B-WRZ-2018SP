@@ -82,7 +82,12 @@ public class IntList {
 
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        if (A.rest == null) {
+            A.rest = B;
+            return null;
+        }
+        IntList.dcatenate(A.rest, B);
+        return A;
     }
 
     /**
@@ -91,7 +96,31 @@ public class IntList {
      */
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        if (A.rest == null) {
+            IntList Result = new IntList(A.first, B);
+            return Result;
+        } else {
+            IntList Result = new IntList(A.first, catenate(A.rest, B));
+            return Result;
+        }
+
+        /**
+        Result.first = A.first;
+        if (A.rest == null) {
+            Result.rest = B;
+            return null;
+        }
+        Result.rest = catenate(A.rest, B);
+        return Result;
+        //A这里相等就错了，赋值地址给result，result即A
+         IntList Result = A;
+        if (Result.rest == null) {
+            Result.rest = B;
+            return null;
+        }
+        Result.rest = catenate(A.rest, B);
+        return Result;
+         */
     }
 
 
