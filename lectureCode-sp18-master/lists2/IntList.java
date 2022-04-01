@@ -57,12 +57,6 @@ public class IntList {
 		return L;
 	}
 
-	public static IntList squareIter(IntList L) {
-		if (L == null) {
-			return L;
-		}
-		
-	}
 
 
 		public static void main(String[] args) {
