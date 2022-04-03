@@ -90,6 +90,9 @@ public class ArrayDeque<T> {
         if (length >= 16 && length / size >= 4) {
             resizeSmaller();
         }
+        if (size == 0) {
+            return null;
+        }
         T returnValue = items[start];
         items[start] = null;
         start = plusOne(start);
@@ -100,6 +103,9 @@ public class ArrayDeque<T> {
     public T removeLast() {
         if (length >= 16 && length / size >= 4) {
             resizeSmaller();
+        }
+        if (size == 0) {
+            return null;
         }
         T returnValue = items[end];
         items[end] = null; //??? whether the beginning value is null??
@@ -125,7 +131,11 @@ public class ArrayDeque<T> {
     }
 
     public T get(int index) {
-        return items[start + index];
+        int position = start;
+        for (int i = 0; i < index; i++) {
+            position = plusOne(position);
+        }
+        return items[position];
     }
 
 }

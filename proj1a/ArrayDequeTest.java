@@ -23,13 +23,9 @@ public class ArrayDequeTest {
         itemTest.addFirst(7);
         itemTest.addLast(8);
         itemTest.addLast(9);
-        for (int i = 0; i < 8; i++) {
-            itemTest.removeFirst();
-        }
-        /**
-        System.out.println(itemTest.get(3));
+
+        System.out.println(itemTest.get(2));
         System.out.println(itemTest.get(5));
-         */
     }
 
 
