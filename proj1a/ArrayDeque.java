@@ -16,8 +16,8 @@ public class ArrayDeque<T> {
         size = 0;
         // Whatever the start number counts, it's just a pointer(both start and end)
         // Suppose we start from (5-1) -- (4+1), actually next start and next end
-        start = 5;
-        end = 4;
+        start = 4;
+        end = 3;
     }
 
     // Help minus the index so that when start is under 0, return it circularly to the end
@@ -28,45 +28,50 @@ public class ArrayDeque<T> {
         return index - 1;
     }
 
+    // remember call it after the length change
     private int plusOne(int index) {
-        // the situation that resize???
         if (index == length - 1) {
             return 0;
         }
         return index + 1;
     }
 
+    // resize didn't change the size of the Array
     private void resizeLarger() {
-        // At this moment, the items are from 0 to end, start to length - 1
-        // start = end + 1 or start = 0 end = length - 1
         T[] newItems = (T[]) new Object[length * 2];
-        System.arraycopy(items, start, newItems, length * 2 - 1 - end, length - 1 - end);
-        System.arraycopy(items, 0, newItems, 0, end + 1); // from 0 to end
+        // simply start from 0 in the new array
+        // use iteration to catch the start and end.
+        int index = start;
+        for (int i = 0; i < size; i++) {
+            newItems[i] = items[index];
+            index = plusOne(index);
+        }
+        start = 0;
+        end = size - 1;
         items = newItems;
         length *= 2;
-        for (int i = 0; i < length; i++) {
-            plusOne(start);
-        }
-        // end won't change because I copied 0 to end to the front
     }
 
     private void resizeSmaller() {
         T[] newItems = (T[]) new Object[length / 2];
-        System.arraycopy(items, start, newItems, length / 2 - start, length - start);
-        System.arraycopy(items, 0, newItems, 0, end + 1); // from 0 to end
+        int index = start;
+        for (int i = 0; i < size; i++) {
+            newItems[i] = items[index];
+            index = plusOne(index);
+        }
+        start = 0;
+        end = size - 1;
         items = newItems;
         length /= 2;
-        for (int i = 0; i < length / 2; i++) {
-            minusOne(start);
-        }
     }
 
     // Before we add, we should check whether we should resize the array to a larger one
+    // resize before we fulfill all the array because it would cause the start and end merge
     public void addFirst(T item) {
         if (size == length - 1) {
             resizeLarger();
         }
-        minusOne(start);
+        start = minusOne(start);
         items[start] = item;
         size++;
     }
@@ -75,29 +80,30 @@ public class ArrayDeque<T> {
         if (size == length - 1) {
             resizeLarger();
         }
-        plusOne(end);
+
+        end = plusOne(end);
         items[end] = item;
         size++;
     }
 
     public T removeFirst() {
-        if (length >= 16 && length / size > 4) {
+        if (length >= 16 && length / size >= 4) {
             resizeSmaller();
         }
         T returnValue = items[start];
-        items[start] = null; //??? whether the beginning value is null??
-        plusOne(start);
+        items[start] = null;
+        start = plusOne(start);
         size--;
         return returnValue;
     }
 
     public T removeLast() {
-        if (length >= 16 && length / size > 4) {
+        if (length >= 16 && length / size >= 4) {
             resizeSmaller();
         }
         T returnValue = items[end];
         items[end] = null; //??? whether the beginning value is null??
-        minusOne(end);
+        end = minusOne(end);
         size--;
         return returnValue;
     }
@@ -119,7 +125,7 @@ public class ArrayDeque<T> {
     }
 
     public T get(int index) {
-        return items[index];
+        return items[start + index];
     }
 
 }
