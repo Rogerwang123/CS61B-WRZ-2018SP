@@ -10,7 +10,7 @@ public class ArrayDeque<T> {
 
     public ArrayDeque() {
 
-        items =(T[]) new Object[8];
+        items = (T[]) new Object[8];
         // At first the array's length is 8
         length = 8;
         size = 0;
@@ -36,10 +36,10 @@ public class ArrayDeque<T> {
         return index + 1;
     }
 
-    public void resizeLarger() {
+    private void resizeLarger() {
         // At this moment, the items are from 0 to end, start to length - 1
         // start = end + 1 or start = 0 end = length - 1
-        T[] newItems =(T[]) new Object[length * 2];
+        T[] newItems = (T[]) new Object[length * 2];
         System.arraycopy(items, start, newItems, length * 2 - 1 - end, length - 1 - end);
         System.arraycopy(items, 0, newItems, 0, end + 1); // from 0 to end
         items = newItems;
@@ -50,8 +50,8 @@ public class ArrayDeque<T> {
         // end won't change because I copied 0 to end to the front
     }
 
-    public void resizeSmaller() {
-        T[] newItems =(T[]) new Object[length / 2];
+    private void resizeSmaller() {
+        T[] newItems = (T[]) new Object[length / 2];
         System.arraycopy(items, start, newItems, length / 2 - start, length - start);
         System.arraycopy(items, 0, newItems, 0, end + 1); // from 0 to end
         items = newItems;

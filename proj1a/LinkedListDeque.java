@@ -1,7 +1,7 @@
 public class LinkedListDeque<T> {
 
     // A Node class including the circular sentinel
-    public class Node {
+    private class Node {
         private T item;
         private Node next;
         private Node previous;
@@ -108,7 +108,7 @@ public class LinkedListDeque<T> {
         }
     }
 
-    public T getRecursivHelper(Node curNode, int index) {
+    private T getRecursivHelper(Node curNode, int index) {
         // the basic case
         if (index == 0) {
             return curNode.item;
@@ -123,8 +123,7 @@ public class LinkedListDeque<T> {
         if (index >= size) {
             return null;
         } else {
-            return null;
+            return getRecursivHelper(sentinel.next, index);
         }
     }
 }
-
