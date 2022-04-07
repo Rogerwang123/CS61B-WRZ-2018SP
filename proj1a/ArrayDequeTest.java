@@ -7,7 +7,6 @@ public class ArrayDequeTest {
     @Test
     public void addTest() {
         ArrayDeque<Integer> itemTest = new ArrayDeque<>();
-
         // isEmpty()
         assertTrue(itemTest.isEmpty());
 
