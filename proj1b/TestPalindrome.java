@@ -26,8 +26,9 @@ public class TestPalindrome {
 
 
         CharacterComparator cc = new OffByOne();
-        assertTrue(palindrome.isPalindrome("flake", cc));
-        assertTrue(palindrome.isPalindrome("fbce", cc));
+        assertTrue(palindrome.isPalindrome("Flake", cc));
+        assertTrue(palindrome.isPalindrome("fbCe", cc));
+        assertTrue(palindrome.isPalindrome("&%", cc));
         assertFalse(palindrome.isPalindrome("ddsfad", cc));
         assertFalse(palindrome.isPalindrome("ddsfad", cc));
     }
