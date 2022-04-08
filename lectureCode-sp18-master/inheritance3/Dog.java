@@ -19,4 +19,6 @@ public class Dog implements Comparable<Dog> {
     public void bark() {
         System.out.println(name + " says: bark");
     }
+
+
 }
